@@ -2,11 +2,10 @@
 # Full documentation here: https://github.com/CryptoSignal/crypto-signal/blob/master/docs/config.md
 
 settings:
-  update_interval: 300
+  update_interval: 60
   market_pairs:
-    - ETH/BTC
-    - LTC/BTC
-    - XMR/BTC
+    - BTC/USDT
+    - ETH/USDT
 
 exchanges:
   bittrex:
