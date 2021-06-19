@@ -7,7 +7,7 @@ settings:
   log_level: INFO
   enable_charts: false
   output_mode: cli
-  update_interval: 300
+  update_interval: 60
   start_worker_interval: 60
   market_data_chunk_size: 20
   market_pairs: null
@@ -66,7 +66,7 @@ notifiers:
 
 indicators:
   momentum:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       alert_frequency: once
       signal:
@@ -76,7 +76,7 @@ indicators:
       candle_period: 1d
       period_count: 10
   mfi:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       alert_frequency: once
       signal:
@@ -86,7 +86,7 @@ indicators:
       candle_period: 1d
       period_count: 10
   obv:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       alert_frequency: once
       signal:
@@ -102,10 +102,10 @@ indicators:
         - rsi
       hot: 30
       cold: 70
-      candle_period: 1d
-      period_count: 14
+      candle_period: 5m
+      period_count: 10
   stoch_rsi:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       alert_frequency: once
       signal:
@@ -116,15 +116,23 @@ indicators:
       period_count: 14
   macd:
     - enabled: true
-      alert_enabled: true
+      alert_enabled: false
       alert_frequency: once
       signal:
         - macd
       hot: 0
       cold: 0
-      candle_period: 1d
-  ichimoku:
+      candle_period: 5m
     - enabled: true
+      alert_enabled: false
+      alert_frequency: once
+      signal:
+        - macdsignal
+      hot: 0
+      cold: 0
+      candle_period: 5m
+  ichimoku:
+    - enabled: false
       alert_enabled: true
       alert_frequency: once
       signal:
@@ -134,7 +142,7 @@ indicators:
       cold: true
       candle_period: 1d
   iiv:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       alert_frequency: always
       signal:
@@ -144,7 +152,7 @@ indicators:
       candle_period: 5m
 informants:
   lrsi:
-    - enabled: true
+    - enabled: false
       alert_enabled: true
       signal:
         - lrsi
@@ -155,32 +163,32 @@ informants:
         - lrsi
       candle_period: 1d  
   vwap:
-    - enabled: true
+    - enabled: false
       signal:
         - vwap
       candle_period: 1d
       period_count: 15
   sma:
-    - enabled: true
+    - enabled: false
       signal:
         - sma
       candle_period: 1d
       period_count: 15
   ema:
-    - enabled: true
+    - enabled: false
       signal:
         - ema
       candle_period: 1d
       period_count: 15
   bollinger_bands:
-    - enabled: true
+    - enabled: false
       signal:
         - upperband
         - middleband
         - lowerband
       candle_period: 1d
   ohlcv:
-    - enabled: true
+    - enabled: false
       signal:
         - close
       candle_period: 1d
@@ -188,14 +196,14 @@ informants:
 
 crossovers:
   std_crossover:
-    - enabled: false
+    - enabled: true
       alert_enabled: true
       alert_frequency: once
-      key_indicator: ema
+      key_indicator: macd
       key_indicator_index: 0
       key_indicator_type: informants
-      key_signal: ema
-      crossed_indicator: sma
-      crossed_indicator_index: 0
+      key_signal: macd
+      crossed_indicator: macd
+      crossed_indicator_index: 1
       crossed_indicator_type: informants
-      crossed_signal: sma
+      crossed_signal: macdsignal
